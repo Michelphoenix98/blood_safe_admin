@@ -258,9 +258,11 @@ class _RecordsPaneState extends State<RecordsPane> {
                             child: StreamBuilder(
                                 stream: _firebaseStream,
                                 builder: (context, snapshot) {
+                                  print("snapshot.hasData=${snapshot.hasData}");
                                   if (snapshot.hasError)
                                     print("${snapshot.error}");
-                                  if (!snapshot.hasData)
+                                  if (!snapshot.hasData ||
+                                      snapshot.data.docs.length == 0)
                                     return Center(
                                         child: Text("No records pending"));
 
